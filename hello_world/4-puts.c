@@ -1,2 +1,6 @@
-#!/bin/bash
-gcc 4-puts.c -o puts("Programming is like building a multilingual puzzle)
+#include <stdio.sh>
+int main(void)
+{
+puts("programing is like building a multilingual puzzle);
+return (0);
+}
