@@ -28,7 +28,7 @@ int main(void)
 	  }
 	else
 	       {
-		 printf("negetive\n");
+		 printf("negative\n");
 	       }
 	return (0);
 }
