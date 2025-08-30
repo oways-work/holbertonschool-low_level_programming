@@ -5,10 +5,10 @@
 /**
  * main - the entry point of program.
  *
- * Description: this is a decription for the program that i am forced to do
- * detetmine positive,negetave or zero.
+ * This program generates a random number and prints whether it's 
+ * positive, negative, or zero.
  *
- * Return: Always 0 (success).
+ * Return: Always 0 (Success).
  */
 int main(void)
 {
