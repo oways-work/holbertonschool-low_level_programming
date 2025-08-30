@@ -26,6 +26,7 @@ int main(void)
 	  }
 	else (n < 0)
 	       {
-		 printf("negetive");
+		 printf("negetive\n");
 	       }
 	return (0);
+}
