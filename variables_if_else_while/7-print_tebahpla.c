@@ -15,3 +15,5 @@ int main(void)
     {
       puchar(c)
     }
+  return(0)
+    }
