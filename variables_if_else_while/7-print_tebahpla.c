@@ -14,10 +14,10 @@ int main(void)
 
   for (c = 'z'; c <= 'a' ; c++)
     {
-      puchar(c)
+      putchar(c)
     }
 {
-  puchar('\n')
+  putchar('\n')
     }
   return(0)
     }
