@@ -9,11 +9,15 @@
  * Return: always 0 (Success).
  */
 int main(void)
+{
   char c;
 
   for (c = 'z'; c <= 'a' ; c++)
     {
       puchar(c)
+    }
+{
+  puchar('\n')
     }
   return(0)
     }
