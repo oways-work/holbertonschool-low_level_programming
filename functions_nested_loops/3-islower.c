@@ -1,0 +1,21 @@
+#include "main.h"
+
+/**
+ * main - checking for lowercase alphabet
+ * a cheaker
+ *
+ * Return: void.
+ */
+int _islower(int c)
+{
+        char c;
+
+        if (c >= 'a' && c <= 'z'; c++)
+        {
+	  return (1)
+	}
+	else
+        {  
+	  return (0)
+	}
+}
