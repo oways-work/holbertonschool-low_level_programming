@@ -9,16 +9,14 @@
  *
  * Return: Always 0.
  */
-void print_alpabet(void)
+      void print_alpabet(void)
+{
+    char letter;
 
-  char letter;
+    for (letter = 'a'; letter <= 'z'; letter++)
+    {
+        _putchar(letter);
+    }
 
-for (letter = 'a'; letter <= 'z'; letter++)
-  {
-    _putchar(letter);
-      }
-
-putchar('\n');
-
-return (0)
+    _putchar('\n');
 }
