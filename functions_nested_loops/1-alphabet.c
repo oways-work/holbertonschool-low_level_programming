@@ -1,4 +1,5 @@
 #include "main.h"
+
 /**
  * main - check the code
   print_alphabet - Prints the lowercase alphabet, followed by a new line.
@@ -9,7 +10,7 @@
  *
  * Return: Always 0.
  */
-      void print_alpabet(void)
+void print_alpabet(void)
 {
     char letter;
 
