@@ -1,20 +1,20 @@
 #include "main.h"
 
 /**
- * print_alphabet - Prints the lowercase alphabet, followed by a new line.
+ * print_alphabet - Prints the lowercase alphabet.
  *
- * This function iterates through all lowercase letters from 'a' to 'z'
- * and prints each one using the _putchar function. It then prints a
- * newline character at the end.
+ * This function prints the lowercase alphabet from 'a' to 'z'
+ * followed by a new line.
+ *
+ * Return: void.
  */
 void print_alphabet(void)
 {
-    char letter;
+	char letter;
 
 	for (letter = 'a'; letter <= 'z'; letter++)
 	{
 		_putchar(letter);
 	}
-
 	_putchar('\n');
 }
