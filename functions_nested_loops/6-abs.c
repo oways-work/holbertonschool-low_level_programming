@@ -4,6 +4,8 @@
 /**
  * main - check the code
  *
+ * this fuction prints the absolute value
+ *
  * Return: Always 0.
  */
 int _abs(int n)
