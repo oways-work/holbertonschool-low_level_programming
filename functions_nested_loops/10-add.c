@@ -2,17 +2,13 @@
 #include <stdio.h>
 
 /**
- * times_table - Prints the 9 times table, starting with 0.
+ * add - Adds two integers and returns the result.
+ * @a: The first integer to be added.
+ * @b: The second integer to be added.
  *
- * Description: This function prints a formatted 9x9 multiplication table.
- * Each row is on a new line, and numbers are separated by a comma
- * and a space. Single-digit numbers are padded with an extra space.
+ * Return: The sum of the two integers.
  */
-int add(int, int)
+int add(int a, int b);
 {
-  int n;
-
-  n = (80, 8);
-    printf("%d\n" n);
-    return (0);
-}  
+  return (a + b);
+}    
