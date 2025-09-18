@@ -21,7 +21,6 @@ char *create_array(unsigned int size, char c)
 	if (array == NULL)
 		return (NULL);
 
-	// The final step: a loop to initialize
 	for (i = 0; i < size; i++)
 	{
 		array[i] = c;
