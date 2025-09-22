@@ -8,16 +8,18 @@
  *
  * Return: Nothing.
  */
-void array_iterator(int *aray, size_t size, void (*action)(int))
+void array_iterator(int *array, size_t size, void (*action)(int))
 {
 	unsigned int i;
-	
+
+	/* 1. Safety check */
 	if (array == NULL || action == NULL)
 		return;
-	
-	for (i = 0; i < size;i++)
-	{
-		action(array[i];
 
+	/* 2. Iterate through the array */
+	for (i = 0; i < size; i++)
+	{
+		/* 3. Execute the action on the current element */
+		action(array[i]);
 	}
 }
