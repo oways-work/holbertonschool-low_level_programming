@@ -1,4 +1,4 @@
-#include "funtion_pointers"
+#include "function_pointers"
 
 /**
  * array_iterator - executes a function on each element of an array
