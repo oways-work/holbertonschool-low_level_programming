@@ -5,7 +5,7 @@
  *
  * Return: 0 if false, something else otherwise.
  */
-int int_index(int *array, size, int (*cmp)(int))
+int int_index(int *array, int size, int (*cmp)(int))
 {
 	int i;
 
