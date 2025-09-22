@@ -1,3 +1,5 @@
+#include "funtion_pointers"
+
 /**
  * array_iterator - executes a function on each element of an array
  * @array: pointer to the integer array
