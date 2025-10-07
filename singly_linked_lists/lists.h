@@ -2,8 +2,8 @@
 #define LISTS_H
 
 #include <stddef.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 /**
  * struct list_s - singly linked list
@@ -15,11 +15,15 @@
  */
 typedef struct list_s
 {
-\tchar *str;
-\tunsigned int len;
-\tstruct list_s *next;
+	char *str;
+	unsigned int len;
+	struct list_s *next;
 } list_t;
 
+
 size_t print_list(const list_t *h);
+
+/* Add prototypes for your other functions here as you write them */
+
 
 #endif /* LISTS_H */
