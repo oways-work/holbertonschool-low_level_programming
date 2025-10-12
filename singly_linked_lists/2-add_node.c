@@ -1,5 +1,6 @@
 #include "lists.h"
-#include <stdlib.h> /* For malloc and strdup */
+#include <stdlib.h> /* For malloc and free */
+#include <string.h> /* For strdup */
 
 /**
  * _strlen - Calculates the length of a string.
@@ -20,20 +21,15 @@ unsigned int _strlen(const char *s)
 }
 
 /**
- * add_node - Adds a new node at the beginning of a list_t list.
- * @head: A pointer to a pointer to the head of the list.
- * @str: The string to be duplicated and stored in the new node.
+ * create_new_node - Allocates and initializes a new list_t node.
+ * @str: The string for the new node.
  *
- * Return: The address of the new element, or NULL if it failed.
+ * Return: The address of the new node, or NULL if allocation fails.
  */
-list_t *add_node(list_t **head, const char *str)
+list_t *create_new_node(const char *str)
 {
 	list_t *new_node;
 	char *dup_str;
-
-	/* Check for valid input string */
-	if (str == NULL)
-		return (NULL);
 
 	/* 1. Allocate memory for the new node */
 	new_node = malloc(sizeof(list_t));
@@ -51,14 +47,38 @@ list_t *add_node(list_t **head, const char *str)
 
 	/* 3. Populate the new node's fields */
 	new_node->str = dup_str;
-	new_node->len = _strlen(dup_str); /* Use custom strlen */
+	new_node->len = _strlen(dup_str);
+	new_node->next = NULL;
 
-	/* 4. Link the new node: Its 'next' points to the current head */
+	return (new_node);
+}
+
+/**
+ * add_node - Adds a new node at the beginning of a list_t list.
+ * @head: A pointer to a pointer to the head of the list.
+ * @str: The string to be duplicated and stored in the new node.
+ *
+ * Return: The address of the new element, or NULL if it failed.
+ */
+list_t *add_node(list_t **head, const char *str)
+{
+	list_t *new_node;
+
+	/* Input validation: String must not be NULL */
+	if (str == NULL)
+		return (NULL);
+
+	/* Create and initialize the new node using helper function */
+	new_node = create_new_node(str);
+	if (new_node == NULL)
+		return (NULL);
+
+	/* Link the new node to the current head */
 	new_node->next = *head;
 
-	/* 5. Update the head pointer to point to the new node */
+	/* Update the head pointer to point to the new node */
 	*head = new_node;
 
-	/* 6. Return the address of the new element */
+	/* Return the address of the new element */
 	return (new_node);
 }
