@@ -6,6 +6,7 @@
  * Desc: Header file containing prototypes for all functions
  * used in the 0-putchar.c project and many more.
  */
+void print_to_98(int n);
 int add(int, int);
 void times_table(void);
 void jack_bauer(void);
