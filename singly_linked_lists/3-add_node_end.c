@@ -1,5 +1,6 @@
 #include "lists.h"
-#include <stdlib.h> /* For malloc and strdup */
+#include <stdlib.h> /* For malloc and free */
+#include <string.h> /* For strdup */
 
 /**
  * _strlen - Calculates the length of a string.
