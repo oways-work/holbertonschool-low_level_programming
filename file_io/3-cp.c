@@ -1,8 +1,11 @@
 #include "main.h"
 
 /**
- * close_fd - Closes a file descriptor and handles potential errors.
- * @fd: The file descriptor to be closed.
+ * close_fd - Closes a file descriptor and handles errors.
+ * @fd: The file descriptor to close.
+ *
+ * Description: If closing fails, it prints an error message to stderr
+ * and exits with code 100.
  */
 void close_fd(int fd)
 {
@@ -16,16 +19,18 @@ void close_fd(int fd)
 /**
  * main - Copies the content of one file to another.
  * @argc: The number of command-line arguments.
- * @argv: An array of strings containing the arguments.
+ * @argv: An array of strings containing the arguments (file names).
  *
- * Return: 0 on success. Exits with a specific code on failure.
+ * Return: 0 on success.
+ * Description: Exits with a specific code on failure, printing messages
+ * to the standard error stream as required.
  */
 int main(int argc, char *argv[])
 {
 	int fd_from, fd_to;
 	ssize_t bytes_read;
 	char buffer[1024];
-	mode_t file_perm = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH;
+	mode_t perms = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH; /* rw-rw-r-- */
 
 	if (argc != 3)
 	{
@@ -38,7 +43,7 @@ int main(int argc, char *argv[])
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
 		exit(98);
 	}
-	fd_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, file_perm);
+	fd_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, perms);
 	if (fd_to == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
@@ -65,23 +70,5 @@ int main(int argc, char *argv[])
 	close_fd(fd_from);
 	close_fd(fd_to);
 	return (0);
-}
-```
-
-### Explanation of the Fix
-
-The core of the logic is in this structure:
-
-```c
-// 1. The loop continues as long as read() is successful and returns bytes (> 0)
-while ((bytes_read = read(fd_from, buffer, 1024)) > 0)
-{
-    // ... attempt to write ...
-}
-
-// 2. This check happens IMMEDIATELY after the loop terminates.
-if (bytes_read == -1)
-{
-    // ... handle the read error and exit with code 98 ...
 }
 
