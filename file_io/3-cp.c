@@ -3,9 +3,6 @@
 /**
  * close_fd - Closes a file descriptor and handles errors.
  * @fd: The file descriptor to close.
- *
- * Description: If closing the file descriptor fails, this function prints
- * an error message to the standard error stream and exits with code 100.
  */
 void close_fd(int fd)
 {
@@ -22,8 +19,6 @@ void close_fd(int fd)
  * @argv: An array of strings containing the arguments (file names).
  *
  * Return: 0 on success.
- * Description: The program exits with a specific code on failure, printing
- * error messages to the standard error as required by the project.
  */
 int main(int argc, char *argv[])
 {
@@ -70,3 +65,5 @@ int main(int argc, char *argv[])
 	close_fd(fd_from);
 	close_fd(fd_to);
 	return (0);
+}
+
