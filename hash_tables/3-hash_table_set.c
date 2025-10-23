@@ -8,7 +8,8 @@
  *
  * Return: 1 if key was found and updated, 0 otherwise.
  */
-static int update_value(hash_node_t *list_head, const char *key, char *value_copy)
+static int update_value(hash_node_t *list_head, const char *key,
+			char *value_copy)
 {
 	hash_node_t *current = list_head;
 
@@ -34,7 +35,7 @@ static int update_value(hash_node_t *list_head, const char *key, char *value_cop
  * Return: 1 on success, 0 on failure.
  */
 static int add_node_to_list(hash_node_t **head_ptr,
-							const char *key, char *value_copy)
+			    const char *key, char *value_copy)
 {
 	hash_node_t *new_node = NULL;
 
@@ -100,4 +101,3 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	free(value_copy);
 	return (0);
 }
-
