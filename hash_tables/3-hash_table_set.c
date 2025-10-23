@@ -1,70 +1,103 @@
 #include "hash_tables.h"
 
 /**
- * hash_table_set - Adds an element to the hash table.
- * @ht: The hash table to add or update the key/value to.
- * @key: The key. Cannot be an empty string.
- * @value: The value associated with the key. Must be duplicated.
+ * update_value - (Helper) Tries to find and update an existing key.
+ * @list_head: Pointer to the head of the linked list at the index.
+ * @key: The key to find.
+ * @value_copy: The new (already duplicated) value to set.
+ *
+ * Return: 1 if key was found and updated, 0 otherwise.
+ */
+static int update_value(hash_node_t *list_head, const char *key, char *value_copy)
+{
+	hash_node_t *current = list_head;
+
+	while (current)
+	{
+		if (strcmp(current->key, key) == 0)
+		{
+			free(current->value); /* Free the old value */
+			current->value = value_copy; /* Set the new one */
+			return (1);
+		}
+		current = current->next;
+	}
+	return (0);
+}
+
+/**
+ * add_node_to_list - (Helper) Creates and adds a new node to the list.
+ * @head_ptr: Double pointer to the head of the list (to modify it).
+ * @key: The key to add (will be duplicated).
+ * @value_copy: The value to add (already duplicated, will be "owned" by node).
+ *
+ * Return: 1 on success, 0 on failure.
+ */
+static int add_node_to_list(hash_node_t **head_ptr,
+							const char *key, char *value_copy)
+{
+	hash_node_t *new_node = NULL;
+
+	new_node = malloc(sizeof(hash_node_t));
+	if (new_node == NULL)
+		return (0); /* Malloc failure */
+
+	new_node->key = strdup(key);
+	if (new_node->key == NULL)
+	{
+		free(new_node);
+		return (0); /* strdup failure */
+	}
+
+	new_node->value = value_copy;
+	new_node->next = *head_ptr; /* Link to the front */
+	*head_ptr = new_node;       /* Update the head */
+
+	return (1);
+}
+
+/**
+ * hash_table_set - Adds or updates an element in the hash table.
+ * @ht: The hash table.
+ * @key: The key (cannot be an empty string).
+ * @value: The value associated with the key (will be duplicated).
  *
  * Return: 1 if it succeeded, 0 otherwise.
- *
- * Description: In case of collision, the new node is added at the
- * beginning of the list. If the key already exists, its value is updated.
  */
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
 	unsigned long int index;
-	hash_node_t *new_node = NULL;
-	hash_node_t *current_node = NULL;
 	char *value_copy = NULL;
+	hash_node_t *list_head = NULL;
 
+	/* 1. Validate inputs */
 	if (ht == NULL || ht->array == NULL || ht->size == 0 ||
 		key == NULL || *key == '\0' || value == NULL)
 		return (0);
 
-	/* Duplicate the value string */
+	/* 2. Duplicate the value string */
 	value_copy = strdup(value);
 	if (value_copy == NULL)
 		return (0);
 
-	/* Get the index for this key */
+	/* 3. Get the index */
 	index = key_index((const unsigned char *)key, ht->size);
+	list_head = ht->array[index];
 
-	/* Check if key already exists in the list at this index */
-	current_node = ht->array[index];
-	while (current_node != NULL)
+	/* 4. Try to update an existing key */
+	if (update_value(list_head, key, value_copy) == 1)
 	{
-		if (strcmp(current_node->key, key) == 0)
-		{
-			/* Key found, update the value and free the old one */
-			free(current_node->value);
-			current_node->value = value_copy;
-			return (1);
-		}
-		current_node = current_node->next;
+		return (1); /* Success, value was updated, value_copy is now used */
 	}
 
-	/* Key not found, create a new node */
-	new_node = malloc(sizeof(hash_node_t));
-	if (new_node == NULL)
+	/* 5. Key not found, add a new node */
+	if (add_node_to_list(&(ht->array[index]), key, value_copy) == 1)
 	{
-		free(value_copy);
-		return (0);
+		return (1); /* Success, new node added */
 	}
 
-	/* Duplicate the key string */
-	new_node->key = strdup(key);
-	if (new_node->key == NULL)
-	{
-		free(value_copy);
-		free(new_node);
-		return (0);
-	}
-
-	new_node->value = value_copy;
-	/* Add the new node at the beginning of the list */
-	new_node->next = ht->array[index];
-	ht->array[index] = new_node;
-
-	return (1);
+	/* 6. Failure during new node creation */
+	free(value_copy);
+	return (0);
 }
+
