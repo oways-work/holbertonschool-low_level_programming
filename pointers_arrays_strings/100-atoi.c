@@ -11,10 +11,8 @@
 int _atoi(char *s)
 {
 	int i = 0, sign = 1, started = 0, d;
-	int result = 0;
-	int limit = -214748364; /* -INT_MAX / 10 */
-	int max = 2147483647; /* INT_MAX */
-	int min = -2147483648; /* INT_MIN */
+	int result = 0, limit = -214748364;
+	int max = 2147483647, min = -2147483648;
 
 	while (s[i] != '\0')
 	{
@@ -27,17 +25,15 @@ int _atoi(char *s)
 		{
 			started = 1;
 			d = s[i] - '0';
-			/* 1. Pre-multiplication overflow check */
 			if (result < limit)
 				return (sign == 1 ? max : min);
 			result *= 10;
-			/* 2. Post-multiplication overflow check (using subtraction) */
 			if (sign == 1)
 			{
 				if (result < -max + d)
 					return (max);
 			}
-			else /* sign == -1 */
+			else
 			{
 				if (result < min + d)
 					return (min);
