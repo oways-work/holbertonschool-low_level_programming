@@ -15,6 +15,7 @@ int _atoi(char *s)
 	int started = 0;
 	int result = 0;
 	int limit = -214748364;
+	int d; /* Moved declaration to the start of the function */
 
 	while (s[i] != '\0')
 	{
@@ -26,7 +27,7 @@ int _atoi(char *s)
 		else if (s[i] >= '0' && s[i] <= '9')
 		{
 			started = 1;
-			int d = s[i] - '0';
+			d = s[i] - '0'; /* Now just assignment */
 
 			/* Pre-multiplication overflow check */
 			if (result < limit)
