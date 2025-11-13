@@ -13,34 +13,31 @@ void times_table(void)
 {
 	int i, j, k;
 
-	for (i = 0; i <= 9; i++) /* Outer loop for rows (0-9) */
+	for (i = 0; i <= 9; i++)
 	{
-		for (j = 0; j <= 9; j++) /* Inner loop for columns (0-9) */
+		for (j = 0; j <= 9; j++)
 		{
-			k = i * j; /* The product */
+			k = i * j;
 
 			if (j == 0)
 			{
-				/* First column, just print the number (which is 0) */
 				_putchar(k + '0');
 			}
 			else if (k < 10)
 			{
-				/* Single digit product */
 				_putchar(',');
 				_putchar(' ');
-				_putchar(' '); /* Extra padding for alignment */
+				_putchar(' ');
 				_putchar(k + '0');
 			}
 			else
 			{
-				/* Double digit product */
 				_putchar(',');
 				_putchar(' ');
-				_putchar((k / 10) + '0'); /* Tens digit */
-				_putchar((k % 10) + '0'); /* Ones digit */
+				_putchar((k / 10) + '0');
+				_putchar((k % 10) + '0');
 			}
 		}
-		_putchar('\n'); /* Newline at the end of each row */
+		_putchar('\n');
 	}
 }
