@@ -3,38 +3,44 @@
 /**
  * times_table - Prints the 9 times table, starting with 0.
  *
- * Return: Nothing.
+ * Description: Prints a formatted 10x10 grid of multiplication
+ * results (0-9). Single-digit numbers are padded with an extra
+ * space to align columns.
+ *
+ * Return: void
  */
 void times_table(void)
 {
-	int row, col, product;
+	int i, j, k;
 
-	for (row = 0; row <= 9; row++)
+	for (i = 0; i <= 9; i++) /* Outer loop for rows (0-9) */
 	{
-		for (col = 0; col <= 9; col++)
+		for (j = 0; j <= 9; j++) /* Inner loop for columns (0-9) */
 		{
-			product = row * col;
-			if (col == 0)
+			k = i * j; /* The product */
+
+			if (j == 0)
 			{
-				_putchar(product + '0');
+				/* First column, just print the number (which is 0) */
+				_putchar(k + '0');
+			}
+			else if (k < 10)
+			{
+				/* Single digit product */
+				_putchar(',');
+				_putchar(' ');
+				_putchar(' '); /* Extra padding for alignment */
+				_putchar(k + '0');
 			}
 			else
 			{
+				/* Double digit product */
 				_putchar(',');
 				_putchar(' ');
-
-				if (product < 10)
-				{
-					_putchar(' ');
-					_putchar(product + '0');
-				}
-				else
-				{
-					_putchar((product / 10) + '0');
-					_putchar((product % 10) + '0');
-				}
+				_putchar((k / 10) + '0'); /* Tens digit */
+				_putchar((k % 10) + '0'); /* Ones digit */
 			}
 		}
-		_putchar('\n');
+		_putchar('\n'); /* Newline at the end of each row */
 	}
 }
