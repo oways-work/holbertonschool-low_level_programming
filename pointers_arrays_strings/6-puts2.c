@@ -6,12 +6,20 @@
  */
 void puts2(char *str)
 {
-	int i = 0;
+	int length = 0;
+	int i;
 
-	while (str[i] != '\0')
+	/* 1. Calculate the length of the string to set a safe boundary */
+	while (str[length] != '\0')
+	{
+		length++;
+	}
+
+	/* 2. Iterate and print every other character, ensuring i stays < length */
+	for (i = 0; i < length; i += 2)
 	{
 		_putchar(str[i]);
-		i += 2;
 	}
+
 	_putchar('\n');
 }
