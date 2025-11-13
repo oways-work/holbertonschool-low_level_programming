@@ -5,8 +5,8 @@
  * @s: The string to be converted.
  *
  * Return: The integer value of the string.
- * Description: Handles signs, numerical conversion, and stops at the
- * first non-digit character after a number has started.
+ * Description: Handles signs, numerical conversion, and implements
+ * overflow checks by accumulating the result as a negative number.
  */
 int _atoi(char *s)
 {
@@ -26,28 +26,19 @@ int _atoi(char *s)
 		else if (s[i] >= '0' && s[i] <= '9')
 		{
 			started = 1;
+			int d = s[i] - '0';
 
+			/* Pre-multiplication overflow check */
 			if (result < limit)
-			{
-				if (sign == 1)
-					return (2147483647);
-				else
-					return (-2147483648);
-			}
+				return (sign == 1 ? 2147483647 : -2147483648);
 
 			result *= 10;
-			if (sign == 1)
-			{
-				if (result < -2147483647 + (s[i] - '0'))
-					return (2147483647);
-				result -= (s[i] - '0');
-			}
-			else
-			{
-				if (result < -2147483648 + (s[i] - '0'))
-					return (-2147483648);
-				result -= (s[i] - '0');
-			}
+
+			/* Post-multiplication overflow check */
+			if (result < (sign == 1 ? -2147483647 : -2147483648) + d)
+				return (sign == 1 ? 2147483647 : -2147483648);
+
+			result -= d;
 		}
 		else if (started == 1)
 		{
